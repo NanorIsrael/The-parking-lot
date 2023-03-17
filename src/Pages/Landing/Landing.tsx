@@ -6,14 +6,16 @@ const PARKING_SIZE = 20;
 
 interface LandingProps{
     setParkingSlotCount : (parkingSize: number) => void;
+    triggerTransitions: () => void;
 }
 
-export function Landing ({setParkingSlotCount} : LandingProps): JSX.Element {
+export function Landing ({setParkingSlotCount, triggerTransitions} : LandingProps): JSX.Element {
     const {register, handleSubmit, formState:{errors}} = useForm({ mode: 'onChange'});
 
     const onSubmit = (data: FieldValues) => {
         const parkingSize: number = Number(data.parkingSize)
         setParkingSlotCount(parkingSize)
+        triggerTransitions();
     }
    
     
