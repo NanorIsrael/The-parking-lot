@@ -35,6 +35,7 @@ export const Main = ({slotCount}: Mainprops) => {
 
             while(slotCount > 0 && rowCount > 0) {
                 slotCount--
+                // eslint-disable-next-line 
                 const slot: number = parkingLot?.slots[slotCount] as number
                 const isSlotTaken = slot !== null && slot !== undefined
                     // console.log('already saved life', slotCount)
@@ -56,7 +57,7 @@ export const Main = ({slotCount}: Mainprops) => {
         distributeSlots()
         console.log('rows limit', rows, slotCount)
 
-    }, [slotCount, availableSlots])
+    }, [slotCount, availableSlots, parkingLot?.slots, rows])
     
     const handleCarPark = () => {
         if(parkingLot.isFull()) {

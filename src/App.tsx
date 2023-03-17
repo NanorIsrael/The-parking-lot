@@ -5,13 +5,16 @@ import { Main } from './Pages/Main';
 function App() {
 
   const [parkingSlotCount, setParkingSlotCount] = useState(0);
+  const Pages = [
+    <Landing 
+      setParkingSlotCount={setParkingSlotCount}
+      />,
+      <Main slotCount={parkingSlotCount}/>
+  ]
 
   return (
     <div className="App">
-    <Landing 
-      setParkingSlotCount={setParkingSlotCount}
-      />
-      <Main slotCount={parkingSlotCount}/>
+    {Pages.map(page => page)}
     </div>
   );
 }
