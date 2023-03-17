@@ -1,0 +1,72 @@
+
+.landing_page {
+    display: flex;
+    background-color: aquamarine;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column nowrap;
+
+}
+
+.landing__h1{
+    width: 100%;
+    font-size: 3.7rem;
+    padding: .2em;
+} 
+
+.landing_form {
+    margin: 2em 0;
+    width: 100%;
+    padding: 1em;
+    text-align: center;
+}
+
+.landing_form input{
+    font: inherit;
+    width: 100%;
+    padding: .7em;
+    border-radius: 5px;
+    border: none;
+    margin: .8em 0;
+}
+
+.landing_form input[type='submit'] {
+    background-color: brown;
+    color: whitesmoke;
+    font-weight: 700;
+}
+
+.landing_form label{
+    position: absolute;
+    top: -10000px;
+}
+
+.landing_h2 {
+    font-weight: 400;
+}
+
+
+@media screen and (min-width: 50rem) {
+    .landing__h1{
+        font-size: 5.7rem;
+        /* width: 41%; */
+
+    }
+}
+@media screen and (min-width:1080px) {
+    .landing_page{
+        flex-flow: row wrap;
+        padding: 0.2em 1em;
+    } 
+
+    .landing__h1{
+        /* font-size: 5.7rem; */
+        width: 41%;
+
+    }
+    .landing_form {
+        /* flex: 1; */
+        width: 59%;
+    }
+}
