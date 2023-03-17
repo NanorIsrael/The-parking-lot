@@ -7,7 +7,6 @@ export const ParkingSlot = ({
     numberPlate, 
     remove
 } : Row) => {
-        console.log('numberPlate', numberPlate)
         const ensureCarExist = () => {
             numberPlate && remove!(numberPlate)
         }

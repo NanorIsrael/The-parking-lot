@@ -7,7 +7,7 @@ export class ParkingLotImpl implements ParkingLot {
 
   constructor(parkingSize: number) {
     this.slots = new Array(parkingSize).fill(null);
-    console.log("from class parkingSize length", this.slots.length);
+    // console.log("from class parkingSize length", this.slots.length);
   }
 
   setParkingLot() {
