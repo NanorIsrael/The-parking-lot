@@ -7,17 +7,22 @@ export class ParkingLotImpl implements ParkingLot {
 
   constructor(parkingSize: number) {
     this.slots = new Array(parkingSize).fill(null);
-    // console.log("from class parkingSize length", this.slots.length);
   }
 
   setParkingLot() {
     const availableSlot = this.availableSlot();
-    const slotIndex = Math.ceil(Math.random() * (availableSlot.length - 1));
+    // const slotIndex = Math.ceil(Math.random() * (availableSlot - 1));
 
     const parkingId = Math.ceil(Math.random() * 999);
-    if (availableSlot.length > 0) {
-      this.slots[availableSlot[slotIndex]] = parkingId;
+    if (availableSlot > 0) {
+      for (let i = 0; i < this.slots.length; i++) {
+        if (this.slots[i] === null) {
+          this.slots[i] = parkingId;
+          break;
+        }
+      }
     }
+
     return this;
   }
 
@@ -29,7 +34,7 @@ export class ParkingLotImpl implements ParkingLot {
         tempSlots.push(i);
       }
     }
-    return tempSlots;
+    return tempSlots.length;
   }
 
   getParkingLot(parkingId: number): number {
@@ -52,6 +57,6 @@ export class ParkingLotImpl implements ParkingLot {
   }
 
   isFull() {
-    return this.availableSlot().length === 0;
+    return this.availableSlot() === 0;
   }
 }

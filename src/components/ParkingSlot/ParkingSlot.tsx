@@ -11,11 +11,7 @@ export const ParkingSlot = ({
             numberPlate && remove!(numberPlate)
         }
     return (
-        <div className={style.slot} 
-        onClick={
-            ensureCarExist
-            }
-            >
+        <div className={style.slot} onClick={ ensureCarExist }>
             {isBusy ? 
             numberPlate 
              : 

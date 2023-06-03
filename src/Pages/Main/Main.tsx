@@ -12,21 +12,25 @@ interface Mainprops {
 export interface Row {
     slotNum: number
     isBusy: boolean
-    numberPlate: number
+    numberPlate: number | null
     remove?: (id: number) => void
 }
 // type Rows = [Row]
-export const Main = ({slotCount}: Mainprops) => {
-    const [parkingLot, setParkingLot] = useState( new ParkingLotImpl(0))
-    const [availableSlots, setAvailableSlots] = useState<number[]>([])
+export const Main = ({slotCount}: Mainprops) => { 
 
-    const [rows, setRows] = useState<Row[][]>([])
+    const [parkingLot, setParkingLot] = useState<null | ParkingLotImpl>(null)
+    const [availableSlots, setAvailableSlots] = useState<undefined | number>(slotCount)
 
-    useEffect(() => {
-         setParkingLot(new ParkingLotImpl(slotCount))
-    }, [slotCount])
+    const [mainrows, setRows] = useState<Row[][]>([])
 
-
+        useEffect(() => {
+            if (slotCount !== 0)
+                setParkingLot(new ParkingLotImpl(slotCount))
+   
+       }, [slotCount])
+   
+    
+  
     useEffect(() => {
         function distributeSlots() {
             let rowCount = Math.ceil(slotCount / ROW_LIMIT)
@@ -35,7 +39,7 @@ export const Main = ({slotCount}: Mainprops) => {
 
             while(slotCount > 0 && rowCount > 0) {
                 slotCount--
-                const slot: number = parkingLot?.slots[slotCount] as number
+                const slot: number | null = parkingLot?.slots[slotCount] as number
                 const isSlotTaken = slot !== null && slot !== undefined
 
                 row.push({
@@ -49,47 +53,66 @@ export const Main = ({slotCount}: Mainprops) => {
                     rows.push(row)
                     row = []
                 }
+
             }
-    
+
             setRows(rows)
+
         }
         distributeSlots()
-    // eslint-disable-next-line 
-    }, [slotCount, availableSlots])
-    
+    }, [slotCount, availableSlots, parkingLot?.slots])
+
+        // eslint-disable-next-line 
+
     const handleCarPark = () => {
-        if(parkingLot.isFull()) {
+        if(parkingLot?.isFull()) {
             console.log('Parking lot is full at the moment')
             return
         }
-        parkingLot.setParkingLot()
-        setAvailableSlots(parkingLot.availableSlot())
+        parkingLot?.setParkingLot()
+        setAvailableSlots(parkingLot?.availableSlot())
     } 
 
     const handleCarRemove = (id: number) => {
-        parkingLot.removeParkingLot(id)
-        setAvailableSlots(parkingLot.availableSlot()) 
+        parkingLot?.removeParkingLot(id)
+        setAvailableSlots(parkingLot?.availableSlot()) 
     }
 
     return (
           <>
-         {rows.map((row, idx) => 
-           ( <div key={row[idx] + ''+ idx} className={style.slots}>
-            { row.map(({ slotNum, isBusy, numberPlate}) => (
-                <ParkingSlot 
-                key={slotNum + idx}
-                slotNum={slotNum}
-                isBusy={isBusy}
-                numberPlate={numberPlate}
-                remove={handleCarRemove}
-                />
-            ))}
-           </div>
-           )
-        )}
-            <div>
-              <Controls handleCarPark={handleCarPark} />
-            </div>
+          <div className={style.app}>
+            <section>
+            {mainrows.map((row, idx) => 
+                ( <div key={row[idx] + ''+ idx} className={style.slots}>
+                { row.map(({ slotNum, isBusy, numberPlate}) => (
+                    <ParkingSlot 
+                    key={slotNum + idx}
+                    slotNum={slotNum}
+                    isBusy={isBusy}
+                    numberPlate={numberPlate}
+                    remove={handleCarRemove}
+                    />
+                ))}
+                </div>
+                )
+                )}
+               
+            </section>
+            <section>
+                    <article>
+                        <h1>Gv Parking Lot.</h1>
+                        <p>Available slots:&nbsp;{availableSlots}</p>
+                        <hr/>
+                      
+                        <Controls handleCarPark={handleCarPark} 
+                        isFull={availableSlots === 0}/>
+
+                        <p>Click on a busy slot to unpack a car.</p>
+
+                    </article>
+            </section>
+          </div>
+         
         </>
     )
 }

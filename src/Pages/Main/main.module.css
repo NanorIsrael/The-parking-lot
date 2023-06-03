@@ -4,9 +4,28 @@
     background-color: chocolate;
     place-content: center;
     gap: 0;
-    width: 50%;
+    /* width: 50%; */
 }
 /* .grid {
     background-color: chocolate;
     
 } */
+.app {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 10em;
+}
+.app section {
+    padding: 0 1rem;
+}
+
+@media screen and (max-width: 500px) {
+    .app {
+        flex-direction : column;
+    }
+    .app section {
+        padding: 1rem 1rem;
+    }
+}

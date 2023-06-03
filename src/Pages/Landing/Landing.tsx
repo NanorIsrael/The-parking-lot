@@ -14,6 +14,8 @@ export function Landing ({setParkingSlotCount, triggerTransitions} : LandingProp
 
     const onSubmit = (data: FieldValues) => {
         const parkingSize: number = Number(data.parkingSize)
+        console.log("the parking size from input called -------->", parkingSize)
+
         setParkingSlotCount(parkingSize)
         triggerTransitions();
     }

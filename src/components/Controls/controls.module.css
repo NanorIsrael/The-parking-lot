@@ -1,0 +1,21 @@
+.p_btn {
+    padding: 1em 0;
+    
+  }
+
+.p_btn button {
+    padding: 0.5em 1em;
+    font-weight: 900;
+    outline: none;
+    color: #fff;
+    border: none;
+}
+
+.bg_g {
+    background-color: green;
+   
+}
+
+.bg_r{
+    background-color: red;
+}
