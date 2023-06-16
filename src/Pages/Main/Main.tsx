@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { ParkingSlot } from '../../components/ParkingSlot'
-import { ParkingLotImpl } from '../../lib/ParkingLot'
+import { ParkingLot, ParkingLotImpl } from '../../lib/ParkingLot'
 import style from './main.module.css'
 import { Controls } from '../../components/Controls'
 
@@ -18,7 +18,7 @@ export interface Row {
 // type Rows = [Row]
 export const Main = ({slotCount}: Mainprops) => { 
 
-    const [parkingLot, setParkingLot] = useState<null | ParkingLotImpl>(null)
+    const [parkingLot, setParkingLot] = useState<ParkingLot>(new ParkingLotImpl())
     const [availableSlots, setAvailableSlots] = useState<undefined | number>(slotCount)
 
     const [mainrows, setRows] = useState<Row[][]>([])
@@ -106,7 +106,7 @@ export const Main = ({slotCount}: Mainprops) => {
                       
                         <Controls handleCarPark={handleCarPark} 
                         isFull={availableSlots === 0}/>
-
+                        
                         <p>Click on a busy slot to unpack a car.</p>
 
                     </article>

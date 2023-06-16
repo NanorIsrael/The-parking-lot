@@ -1,11 +1,18 @@
 // import { SetStateAction } from "react";
 
-interface ParkingLot {}
+export interface ParkingLot {
+  slots: number[] | null[];
+  setParkingLot: () => ParkingLot
+  availableSlot: () => number
+  getParkingLot: (parkingId: number) => number
+  removeParkingLot: (parkingId: number) => ParkingLot
+  isFull: () => boolean
+}
 export class ParkingLotImpl implements ParkingLot {
   MAX_SLOT_LIMIT = 20;
   slots: number[] | null[];
 
-  constructor(parkingSize: number) {
+  constructor(parkingSize = 0) {
     this.slots = new Array(parkingSize).fill(null);
   }
 

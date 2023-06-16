@@ -6,7 +6,6 @@ type ControlsType = {
 }
 
 export const Controls = ({handleCarPark, isFull}: ControlsType) => {
-        // console.log('numberPlate', numberPlate)
     return (
         <div className={style.p_btn}>
                   <button 

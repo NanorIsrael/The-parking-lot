@@ -20,7 +20,6 @@ const pages = [
     </animated.div>
   )
 ]
-let i = 0;
 
 function App() {
 
@@ -35,7 +34,7 @@ function App() {
     enter: { opacity: 1, transform: "translate3d(0%,0,0)" },
     leave: { opacity: 0, transform: "translate3d(-50%,0,0)" },
   })
-  console.log("I have been rendered", i++)
+
   useEffect(() => {
     transRef.start()
   }, [index, transRef])
